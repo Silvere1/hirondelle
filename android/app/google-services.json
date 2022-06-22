@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1068506741826",
+    "project_id": "repertoire-contactes",
+    "storage_bucket": "repertoire-contactes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068506741826:android:dcd90524a4a7c1117701db",
+        "android_client_info": {
+          "package_name": "com.waouhmonde.repertoire_contactes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068506741826-qpf9avtvd099c9t28ip8qdlqd43tjccc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.waouhmonde.repertoire_contactes",
+            "certificate_hash": "dee50fde472a2fc57e4a92b9b010f94582771996"
+          }
+        },
+        {
+          "client_id": "1068506741826-41mmlqnu6vbhgfc0s890khv2r7b5h8l8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1MRKfTWQnHP7oLFzB6ObqHWGGl74kjS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068506741826-41mmlqnu6vbhgfc0s890khv2r7b5h8l8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1068506741826-3nkj8ramdu12n0jm33697up7hrqi27vo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.waouhmonde.repertoireContactes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
