@@ -7,16 +7,17 @@ import '../../../res/theme/colors/const_colors.dart';
 import '../../../res/theme/typography/font_weight.dart';
 import '../../../res/utils/constants/rc_assets_files.dart';
 
-buildUserBanned() => Get.bottomSheet(
+buildAdresseInvalid() => Get.bottomSheet(
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SvgPicture.asset(RcAssets.icBanned, color: primColor, height: 56),
+            SvgPicture.asset(RcAssets.icErrorRegular,
+                color: Colors.redAccent, height: 56),
             const SizedBox(height: 26),
             Text(
-              "Désolé !\nVotre compte est inactif !\nContactez votre administrateur pour toute éventualité.",
+              "Adresse invalide !\nVeuillez renseigner au moin :\n- Pays\n- Ville\n- Quartier",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

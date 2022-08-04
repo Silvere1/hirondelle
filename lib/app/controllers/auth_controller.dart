@@ -264,10 +264,11 @@ class AuthController extends GetxController {
         if (data == AppServices.instance.rcUser?.tel1) {
           Get.offAll(() => const RcHome());
         } else {
-          buildAlertLink().then((value) {
+          buildAlertLink().then((value) async {
             if (value != null) {
               if (value == true) {
-                logout();
+                await logoutForLink();
+                Get.offAll(() => GoNum(userNum: data));
               } else {
                 Get.offAll(() => const RcHome());
               }
@@ -288,11 +289,27 @@ class AuthController extends GetxController {
 
   Future<RcUser?> getInfosUserForNum(String tel) async {
     if (NetworkController.instance.isOk) {
-      var x = await _db.where("tel1", isEqualTo: tel).get();
-      if (x.size == 1) {
-        return RcUser.fromDocumentSnapshot(x.docs.first);
-      } else {
-        return null;
+      try {
+        var x = await _db
+            .where("tel1", isEqualTo: tel)
+            .get(const GetOptions(source: Source.server))
+            .timeout(const Duration(seconds: 60));
+        if (x.size == 1) {
+          return RcUser.fromDocumentSnapshot(x.docs.first);
+        } else {
+          return null;
+        }
+      } catch (e) {
+        await 2.delay();
+        var x = await _db
+            .where("tel1", isEqualTo: tel)
+            .get()
+            .timeout(const Duration(seconds: 60));
+        if (x.size == 1) {
+          return RcUser.fromDocumentSnapshot(x.docs.first);
+        } else {
+          return null;
+        }
       }
     } else {
       return null;
@@ -471,6 +488,13 @@ class AuthController extends GetxController {
     AppServices.instance.checkUser();
   }
 
+  Future<void> logoutForLink() async {
+    await PrefManager.instance.cleanAll();
+    final auth = FirebaseAuth.instance;
+    auth.signOut();
+    AppServices.instance.checkUser();
+  }
+
   Future<void> login() async {
     Waiting().show();
     RcUser? rcUser = await getInfosUserForNum(phone.value);
@@ -640,13 +664,21 @@ class AuthController extends GetxController {
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getTous(bool enable) {
-    return _db
-        .orderBy("nom", descending: false)
-        .orderBy("prenom", descending: false)
-        .where("confirmed", isEqualTo: true)
-        .where("enable", isEqualTo: enable)
-        .snapshots();
+  Stream<QuerySnapshot> getTous(bool? enable) {
+    if (enable != null) {
+      return _db
+          .orderBy("nom", descending: false)
+          .orderBy("prenom", descending: false)
+          .where("confirmed", isEqualTo: true)
+          .where("enable", isEqualTo: enable)
+          .snapshots();
+    } else {
+      return _db
+          .orderBy("nom", descending: false)
+          .orderBy("prenom", descending: false)
+          .where("confirmed", isEqualTo: true)
+          .snapshots();
+    }
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getProfile(String id) {

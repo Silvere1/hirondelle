@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../app/models/adresse.dart';
 import '../../../res/utils/constants/rc_assets_files.dart';
+import '../../global/components/adresse_invalid.dart';
 
 class EditAdresse extends StatefulWidget {
   const EditAdresse({Key? key, required this.adresse}) : super(key: key);
@@ -140,13 +141,20 @@ class _EditAdresseState extends State<EditAdresse> {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.back(
-                    result: Adresse(
-                  pays: paysC.text.trim(),
-                  ville: vileC.text.trim(),
-                  quartier: quartC.text.trim(),
-                  description: descC.text.trim(),
-                ));
+                if (paysC.text.trim().isNotEmpty &&
+                    vileC.text.trim().isNotEmpty &&
+                    quartC.text.trim().isNotEmpty) {
+                  Get.back(
+                      result: Adresse(
+                    pays: paysC.text.trim(),
+                    ville: vileC.text.trim(),
+                    quartier: quartC.text.trim(),
+                    description:
+                        descC.text.trim().isNotEmpty ? descC.text.trim() : null,
+                  ));
+                } else {
+                  buildAdresseInvalid();
+                }
               },
               child: const Text("Sauvegarder"),
             ),

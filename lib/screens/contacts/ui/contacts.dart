@@ -93,50 +93,43 @@ class _ContactsState extends State<Contacts> {
               visible: focused || searchC.text.trim().isNotEmpty,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 4,
                   children: [
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 4,
-                      children: [
-                        ...filtres
-                            .map(
-                              (e) => ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Material(
-                                  color: e.selected
-                                      ? primColor.withOpacity(.3)
-                                      : Colors.black12,
-                                  child: InkWell(
-                                    onTap: () {
-                                      for (var e in filtres) {
-                                        e.selected = false;
-                                      }
-                                      filtres[filtres.indexOf(e)].selected =
-                                          true;
-                                      setState(() {
-                                        index = filtres.indexOf(e);
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8, vertical: 4),
-                                      child: Text(
-                                        e.name,
-                                        style: TextStyle(
-                                          color: e.selected ? primColor : null,
-                                        ),
-                                      ),
+                    ...filtres
+                        .map(
+                          (e) => ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Material(
+                              color: e.selected
+                                  ? primColor.withOpacity(.3)
+                                  : Colors.black12,
+                              child: InkWell(
+                                onTap: () {
+                                  for (var e in filtres) {
+                                    e.selected = false;
+                                  }
+                                  filtres[filtres.indexOf(e)].selected = true;
+                                  setState(() {
+                                    index = filtres.indexOf(e);
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  child: Text(
+                                    e.name,
+                                    style: TextStyle(
+                                      color: e.selected ? primColor : null,
                                     ),
                                   ),
                                 ),
                               ),
-                            )
-                            .toList(),
-                      ],
-                    ),
+                            ),
+                          ),
+                        )
+                        .toList(),
                   ],
                 ),
               ),

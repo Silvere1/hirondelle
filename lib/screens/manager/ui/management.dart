@@ -273,12 +273,14 @@ class _ManagementState extends State<Management> {
                                   spacing: 4,
                                   children: [
                                     const Text("Type :"),
-                                    SvgPicture.asset(
+                                    Text(
                                       user.admin
-                                          ? RcAssets.icUserAdmin
-                                          : RcAssets.icUser,
-                                      height: 24,
-                                    )
+                                          ? "Administrateur"
+                                          : "Utilisateur",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(

@@ -1,12 +1,12 @@
 name: repertoire_contactes
-description: Une application mobile pour réunir ses amis dans une communeauté.
+description: Une application mobile pour réunir ses amis dans une communauté.
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.12+13
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.17.5 <3.0.0"
 
 dependencies:
   flutter:
@@ -35,10 +35,9 @@ dependencies:
   emoji_regex: ^0.0.2
   pinput: ^2.2.11
   share_plus: ^4.0.9
-  image_picker: ^0.8.5+3
-  url_launcher: ^6.1.3
+  image_pickers: ^2.0.0+2
+  url_launcher: ^6.1.4
   cached_network_image: ^3.2.1
-  image_cropper: ^2.0.3
 
 dev_dependencies:
   flutter_test:

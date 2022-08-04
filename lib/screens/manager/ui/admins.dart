@@ -28,8 +28,8 @@ class _AdminsState extends State<Admins> {
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.only(top: 8, bottom: 32),
                 children: listData
-                    .map((e) =>
-                        ItemManager(rcUser: RcUser.fromDocumentSnapshot(e)))
+                    .map((e) => ItemManager(
+                        tag: '', rcUser: RcUser.fromDocumentSnapshot(e)))
                     .toList(),
               );
             } else {

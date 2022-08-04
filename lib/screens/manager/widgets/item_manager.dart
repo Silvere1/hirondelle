@@ -7,11 +7,14 @@ import '../../../app/models/rc_user.dart';
 import '../../../res/theme/colors/const_colors.dart';
 import '../../../res/theme/typography/font_weight.dart';
 import '../../../res/utils/constants/rc_assets_files.dart';
+import '../../global/widgets/substring_highlight.dart';
 import '../ui/management.dart';
 
 class ItemManager extends StatelessWidget {
-  const ItemManager({Key? key, required this.rcUser}) : super(key: key);
+  const ItemManager({Key? key, required this.rcUser, required this.tag})
+      : super(key: key);
   final RcUser rcUser;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class ItemManager extends StatelessWidget {
           color: Colors.white,
           child: InkWell(
             onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
               Get.to(() => Management(id: rcUser.id));
             },
             child: Padding(
@@ -53,14 +57,34 @@ class ItemManager extends StatelessWidget {
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          "${rcUser.nom} ${rcUser.prenom}",
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: MyFontWeight.extraBold),
+                        SubstringHighlight(
+                          text: "${rcUser.nom} ${rcUser.prenom}",
+                          term: tag,
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: MyFontWeight.medium,
+                          ),
+                          textStyleHighlight: TextStyle(
+                            fontSize: 16,
+                            color: primColor,
+                            fontWeight: MyFontWeight.medium,
+                          ),
                         ),
-                        Text(rcUser.tel1),
+                        Wrap(
+                          alignment: WrapAlignment.spaceBetween,
+                          children: [
+                            Text(rcUser.tel1),
+                            if (!rcUser.enable)
+                              SvgPicture.asset(
+                                RcAssets.icDeniedRegular,
+                                height: 20,
+                                color: Colors.redAccent,
+                              ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

@@ -42,8 +42,8 @@ class AddQuality extends StatelessWidget {
               onChanged: (value) {},
               controller: qualityC,
               keyboardType: TextInputType.name,
-              textInputAction: TextInputAction.next,
-              maxLength: 24,
+              textInputAction: TextInputAction.done,
+              maxLength: 32,
               inputFormatters: [
                 FilteringTextInputFormatter.deny(emojiRegexRGI()),
                 FilteringTextInputFormatter.deny(emojiRegexText())
@@ -54,6 +54,12 @@ class AddQuality extends StatelessWidget {
                 counterText: "",
               ),
             ),
+            const Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "32 caractères au maximum",
+                  style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                )),
             const SizedBox(
               height: 16,
             ),

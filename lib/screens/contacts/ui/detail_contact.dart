@@ -237,7 +237,7 @@ class _DetailContactState extends State<DetailContact> {
                                 const Text("Adresse"),
                                 if (user.adresse != null)
                                   Text(
-                                      "${user.adresse?.pays ?? ""}/${user.adresse?.ville ?? ""}/${user.adresse?.quartier ?? ""}/${user.adresse?.description ?? ""}",
+                                      "${user.adresse?.pays ?? ""}/${user.adresse?.ville ?? ""}/${user.adresse?.quartier ?? ""}${user.adresse?.description != null ? "/${user.adresse!.description!}" : ""}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall),

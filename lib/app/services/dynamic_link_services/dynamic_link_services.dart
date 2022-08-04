@@ -21,7 +21,7 @@ class DynamicLinksServices {
       link: Uri.https(Constants.domaine, "/appinvite", {"userNum": userNum}),
       androidParameters: AndroidParameters(
         packageName: packageInfo.packageName,
-        minimumVersion: 0,
+        minimumVersion: 13,
       ),
     );
     final url = await _dynamicLink.buildShortLink(dynamicLinkParameters,
@@ -46,10 +46,11 @@ class DynamicLinksServices {
           if (data == AppServices.instance.rcUser?.tel1) {
             Get.offAll(() => const RcHome());
           } else {
-            buildAlertLink().then((value) {
+            buildAlertLink().then((value) async {
               if (value != null) {
                 if (value == true) {
-                  AuthController.instance.logout();
+                  await AuthController.instance.logoutForLink();
+                  Get.offAll(() => GoNum(userNum: data));
                 } else {
                   Get.offAll(() => const RcHome());
                 }

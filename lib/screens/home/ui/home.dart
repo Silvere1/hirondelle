@@ -25,23 +25,23 @@ class _RcHomeState extends State<RcHome> {
     BottomNavigationBarItem(
       icon: SvgPicture.asset(
         RcAssets.icUserGroupsRegular,
-        height: 24,
+        height: 30,
       ),
       activeIcon: SvgPicture.asset(
         RcAssets.icUserGroups,
-        height: 24,
+        height: 30,
         color: primColor,
       ),
-      label: "Contacts",
+      label: "Membres",
     ),
     BottomNavigationBarItem(
       icon: SvgPicture.asset(
         RcAssets.icUserRegular,
-        height: 24,
+        height: 30,
       ),
       activeIcon: SvgPicture.asset(
         RcAssets.icUser,
-        height: 24,
+        height: 30,
         color: primColor,
       ),
       label: "Profil",
@@ -51,23 +51,23 @@ class _RcHomeState extends State<RcHome> {
     BottomNavigationBarItem(
       icon: SvgPicture.asset(
         RcAssets.icUserGroupsRegular,
-        height: 24,
+        height: 30,
       ),
       activeIcon: SvgPicture.asset(
         RcAssets.icUserGroups,
-        height: 24,
+        height: 30,
         color: primColor,
       ),
-      label: "Contacts",
+      label: "Membres",
     ),
     BottomNavigationBarItem(
       icon: SvgPicture.asset(
         RcAssets.icUsersSettingsRegular,
-        height: 24,
+        height: 30,
       ),
       activeIcon: SvgPicture.asset(
         RcAssets.icUsersSettings,
-        height: 24,
+        height: 30,
         color: primColor,
       ),
       label: "Manager",
@@ -75,11 +75,11 @@ class _RcHomeState extends State<RcHome> {
     BottomNavigationBarItem(
       icon: SvgPicture.asset(
         RcAssets.icUserAdminRegular,
-        height: 24,
+        height: 30,
       ),
       activeIcon: SvgPicture.asset(
         RcAssets.icUserAdmin,
-        height: 24,
+        height: 30,
         color: primColor,
       ),
       label: "Profil",
@@ -102,21 +102,47 @@ class _RcHomeState extends State<RcHome> {
     super.initState();
   }
 
+  Future<bool> _onWillPop() async {
+    if (homeController.currentIndex.value != 0) {
+      homeController.currentIndex(0);
+      return false;
+    } else {
+      if (homeController.timing.value == 5 ||
+          homeController.timing.value == 0) {
+        homeController.makeTimer();
+        Get.snackbar(
+          "Attention !",
+          "Cliquez encore une fois pour quitter l'application.",
+          snackPosition: SnackPosition.BOTTOM,
+          onTap: (snack) {
+            Get.closeCurrentSnackbar();
+          },
+        );
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Obx(() => appServices.rcUser!.admin
-            ? adminWidgets[homeController.currentIndex.value]
-            : userWidgets[homeController.currentIndex.value]),
-        bottomNavigationBar: Obx(
-          () => BottomNavigationBar(
-            onTap: homeController.onTapItemBottom,
-            currentIndex: homeController.currentIndex.value,
-            type: BottomNavigationBarType.fixed,
-            selectedFontSize: 10,
-            showUnselectedLabels: false,
-            items: appServices.rcUser!.admin ? itemBtmAdmin : itemBtmUser,
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: SafeArea(
+        child: Scaffold(
+          body: Obx(() => appServices.rcUser!.admin
+              ? adminWidgets[homeController.currentIndex.value]
+              : userWidgets[homeController.currentIndex.value]),
+          bottomNavigationBar: Obx(
+            () => BottomNavigationBar(
+              onTap: homeController.onTapItemBottom,
+              currentIndex: homeController.currentIndex.value,
+              type: BottomNavigationBarType.fixed,
+              selectedFontSize: 9,
+              showUnselectedLabels: false,
+              items: appServices.rcUser!.admin ? itemBtmAdmin : itemBtmUser,
+            ),
           ),
         ),
       ),

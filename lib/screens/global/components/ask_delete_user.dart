@@ -16,7 +16,7 @@ Future<bool?> buildAskDeleteUser() => Get.bottomSheet<bool?>(
                 color: Colors.red, height: 56),
             const SizedBox(height: 26),
             const Text(
-              "Vous sur le point de supprimer ce compte !\nVoulez-vous continuer ?",
+              "Vous êtes sur le point de supprimer ce compte !\nVoulez-vous continuer ?",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

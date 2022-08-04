@@ -78,13 +78,6 @@ class ItemContact extends StatelessWidget {
                             fontWeight: MyFontWeight.medium,
                           ),
                         ),
-                        /*Text(
-                          "${rcUser.nom} ${rcUser.prenom}",
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: MyFontWeight.extraBold,
-                          ),
-                        ),*/
                         const SizedBox(
                           height: 8,
                         ),

@@ -29,6 +29,10 @@ class _ManagerState extends State<Manager> {
     Invites(),
   ];
 
+  void _onTap(int i) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,6 +42,7 @@ class _ManagerState extends State<Manager> {
           appBar: AppBar(
             title: TabBar(
               tabs: _tab,
+              onTap: _onTap,
               physics: const NeverScrollableScrollPhysics(),
               indicatorColor: backGround,
               indicatorWeight: 6,

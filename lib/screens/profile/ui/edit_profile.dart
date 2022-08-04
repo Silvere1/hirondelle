@@ -258,7 +258,7 @@ class _EditProfileState extends State<EditProfile> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(adresse != null
-                                    ? "${adresse?.pays ?? ""}/${adresse?.ville ?? ""}/${adresse?.quartier ?? ""}/${adresse?.description ?? ""}"
+                                    ? "${adresse?.pays ?? ""}/${adresse?.ville ?? ""}/${adresse?.quartier ?? ""}${adresse?.description != null ? "/${adresse!.description!}" : ""}"
                                     : "adresse"),
                               ],
                             ),
